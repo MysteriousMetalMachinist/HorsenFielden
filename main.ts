@@ -896,7 +896,7 @@ namespace kitronik_air_quality {
         kitronik_BME688.establishBaselines()    // Call function in bme688-base to read and calculate the baselines for gas resistance and ambient temperature
 
         basic.pause(2000)
-        clear()
+        
     }
 
     /**
@@ -960,7 +960,6 @@ namespace kitronik_air_quality {
     //% weight=50 blockGap=8
     export function readGasRes(): number {
         if (gasInit == false) {
-            clear()
             //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
@@ -979,7 +978,6 @@ namespace kitronik_air_quality {
     //% weight=95 blockGap=8
     export function readeCO2(): number {
         if (gasInit == false) {
-            clear()
             //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
@@ -1000,7 +998,6 @@ namespace kitronik_air_quality {
     //% weight=85 blockGap=8
     export function getAirQualityPercent(): number {
         if (gasInit == false) {
-            clear()
             //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
@@ -1020,7 +1017,6 @@ namespace kitronik_air_quality {
     //% weight=100 blockGap=8
     export function getAirQualityScore(): number {
         if (gasInit == false) {
-            clear()
             //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
@@ -1407,7 +1403,6 @@ namespace kitronik_air_quality {
     //% blockId=kitronik_air_quality_erase_data
     //% block="erase all data"
     export function eraseData(): void {
-        show("Erasing Memory...", 2, ShowAlign.Centre)
         let blankBlock = pins.createBuffer(130)
         let addr = 0
         let i2cAddr = 0
@@ -1443,10 +1438,6 @@ namespace kitronik_air_quality {
 
         writeTitles = false
 
-        clear()
-        show("Memory Erase Complete", 2, ShowAlign.Centre)
-        basic.pause(2500)
-        clear()
     }
 
     /**
