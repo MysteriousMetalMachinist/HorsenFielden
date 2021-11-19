@@ -1155,7 +1155,7 @@ namespace kitronik_air_quality {
     //% blockId=kitronik_smart_greenhouse_read_io_pins 
     //% block="%readType|read %pin"
     //% weight=95 blockGap=8
-    export function readIOPin(readType: kitronik_smart_greenhouse.PinType, pin: kitronik_smart_greenhouse.IOPins): number {
+    export function readIOPin(readType: kitronik_air_quality.PinType, pin: kitronik_air_quality.IOPins): number {
         let readValue = 0
         if (pin == 0) {
             if (readType == 0) {
@@ -1196,7 +1196,7 @@ namespace kitronik_air_quality {
     //% block="digital write pin %pin|to %value"
     //% value.min=0 value.max=1
     //% weight=90 blockGap=8
-    export function digitalWriteIOPin(pin: kitronik_smart_greenhouse.IOPins, value: number): void {
+    export function digitalWriteIOPin(pin: kitronik_air_quality.IOPins, value: number): void {
         if (pin == 0) {
             pins.digitalWritePin(DigitalPin.P0, value)
         }
@@ -1219,7 +1219,7 @@ namespace kitronik_air_quality {
     //% block="analog write pin %pin|to %value"
     //% value.min=0 value.max=1023
     //% weight=85 blockGap=8
-    export function analogWriteIOPin(pin: kitronik_smart_greenhouse.IOPins, value: number): void {
+    export function analogWriteIOPin(pin: kitronik_air_quality.IOPins, value: number): void {
         if (pin == 0) {
             pins.analogWritePin(AnalogPin.P0, value)
         }
@@ -1244,7 +1244,7 @@ namespace kitronik_air_quality {
     //% power.min=0 power.max=100
     //% expandableArgumentMode="toggle"
     //% weight=80 blockGap=8
-    export function controlHighPowerPin(pin: kitronik_smart_greenhouse.HighPowerPins, output: boolean, power: number = 100): void {
+    export function controlHighPowerPin(pin: kitronik_air_quality.HighPowerPins, output: boolean, power: number = 100): void {
         if (pin == 13) {
             if (output == true) {
                 if (power != 100) {
