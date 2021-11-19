@@ -1,0 +1,32 @@
+{
+    "name": "Horsen Feilden",
+    "version": "0.0.1",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "kitronik_RTC": "github:KitronikLtd/pxt-kitronik-rtc-base#v0.0.12",
+        "kitronik_BME688": "github:KitronikLtd/pxt-kitronik-bme688-base#v0.0.8",
+        "kitronik_EEPROM": "github:KitronikLtd/pxt-kitronik-eeprom-base#v0.0.2"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "targetVersions": {
+        "target": "4.0.11",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj",
+    "disablesVariants": [
+        "mbdal"
+    ]
+}
