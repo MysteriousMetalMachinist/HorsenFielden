@@ -77,6 +77,18 @@ enum PressureUnitList {
 //% weight=100 color=#00A654 icon="\uf0c2" block="Air Quality (V2)"
 //% groups='["Control", "Show", "Draw", "Delete", "Advanced", "Set Time", "Set Date", "Read Time", "Read Date", "Alarm", "Setup", "Measure", "Climate", "Air Quality", "General Inputs/Outputs", "Write", "Read," "Setup", "Add Data", "Transfer"]'
 namespace kitronik_air_quality {
+        ////////////////////////////////
+    //           MUSIC            //
+    ////////////////////////////////
+
+    /**
+     * Setup micro:bit to play music through on board buzzer
+     */
+    //% blockId="kitronik_smart_greenhouse_buzzer_setup" block="set music pin for buzzer"
+    //% weight=100 blockGap=8
+    export function setBuzzerPin(): void {
+        pins.analogSetPitchPin(AnalogPin.P12)
+    }
     ////////////////////////////////
     //         ZIP LEDS           //
     ////////////////////////////////
@@ -1069,6 +1081,213 @@ namespace kitronik_air_quality {
 
     //    return airQualityRating
     //}    
+
+
+    ////////////////////////////////
+    //     PIN INPUT/OUTPUTS      //
+    ////////////////////////////////
+
+    /**
+     * General IO pin type
+     */
+    export enum PinType {
+        //% block=Analog
+        analog = 0,
+        //% block=Digital
+        digital = 1
+    }
+
+    /**
+     * General IO pins
+     */
+    export enum IOPins {
+        //% block=P0
+        p0 = 0,
+        //% block=P1
+        p1 = 1,
+        //% block=P2
+        p2 = 2
+    }
+
+    /**
+     * High Power Output pin options
+     */
+    export enum HighPowerPins {
+        //% block=P13
+        pin13 = 13,
+        //% block=P14
+        pin14 = 14
+    }
+
+    /**
+     * Control the servo output
+     * @param angle to set the servo
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group=Servo
+    //% blockId=kitronik_smart_greenhouse_servo_write 
+    //% block="set servo on P15 to $angle|degrees"
+    //% angle.shadow="protractorPicker"
+    //% weight=70 blockGap=8
+    export function servoWrite(angle: number): void {
+        pins.servoWritePin(AnalogPin.P15, angle)
+    }
+
+    /**
+     * Turn off the servo output
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group=Servo
+    //% blockId=kitronik_smart_greenhouse_servo_stop 
+    //% block="turn off servo on P15"
+    //% weight=65 blockGap=8
+    export function servoStop(): void {
+        pins.digitalWritePin(DigitalPin.P15, 0)
+    }
+
+    /**
+     * Read value from IO pins, either Digital or Analog
+     * @param readType is either Digital or Analog
+     * @param pin which IO pin to read
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group="General Inputs/Outputs"
+    //% blockId=kitronik_smart_greenhouse_read_io_pins 
+    //% block="%readType|read %pin"
+    //% weight=95 blockGap=8
+    export function readIOPin(readType: kitronik_smart_greenhouse.PinType, pin: kitronik_smart_greenhouse.IOPins): number {
+        let readValue = 0
+        if (pin == 0) {
+            if (readType == 0) {
+                readValue = pins.analogReadPin(AnalogPin.P0)
+            }
+            else if (readType == 1) {
+                readValue = pins.digitalReadPin(DigitalPin.P0)
+            }
+        }
+        else if (pin == 1) {
+            if (readType == 0) {
+                readValue = pins.analogReadPin(AnalogPin.P1)
+            }
+            else if (readType == 1) {
+                readValue = pins.digitalReadPin(DigitalPin.P1)
+            }
+        }
+        else if (pin == 2) {
+            if (readType == 0) {
+                readValue = pins.analogReadPin(AnalogPin.P2)
+            }
+            else if (readType == 1) {
+                readValue = pins.digitalReadPin(DigitalPin.P2)
+            }
+        }
+
+        return readValue
+    }
+
+    /**
+     * Digital write value to IO pins
+     * @param pin which IO pin to read
+     * @param value to write to the pin, eg: 0
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group="General Inputs/Outputs"
+    //% blockId=kitronik_smart_greenhouse_digital_write_io_pins 
+    //% block="digital write pin %pin|to %value"
+    //% value.min=0 value.max=1
+    //% weight=90 blockGap=8
+    export function digitalWriteIOPin(pin: kitronik_smart_greenhouse.IOPins, value: number): void {
+        if (pin == 0) {
+            pins.digitalWritePin(DigitalPin.P0, value)
+        }
+        else if (pin == 1) {
+            pins.digitalWritePin(DigitalPin.P1, value)
+        }
+        else if (pin == 2) {
+            pins.digitalWritePin(DigitalPin.P2, value)
+        }
+    }
+
+    /**
+     * Analog write value to IO pins
+     * @param pin which IO pin to read
+     * @param value to write to the pin, eg: 1023
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group="General Inputs/Outputs"
+    //% blockId=kitronik_smart_greenhouse_analog_write_io_pins 
+    //% block="analog write pin %pin|to %value"
+    //% value.min=0 value.max=1023
+    //% weight=85 blockGap=8
+    export function analogWriteIOPin(pin: kitronik_smart_greenhouse.IOPins, value: number): void {
+        if (pin == 0) {
+            pins.analogWritePin(AnalogPin.P0, value)
+        }
+        else if (pin == 1) {
+            pins.analogWritePin(AnalogPin.P1, value)
+        }
+        else if (pin == 2) {
+            pins.analogWritePin(AnalogPin.P2, value)
+        }
+    }
+
+    /**
+     * Turn high power outputs on and off
+     * @param pin which high power output pin to control
+     * @param output is the boolean output of the pin, either ON or OFF
+     * @param power is an optional parameter to set the power output for the pin eg: 100
+     */
+    //% subcategory="Inputs/Outputs"
+    //% group="High Power Outputs"
+    //% blockId=kitronik_environmental_board_high_power_on_off 
+    //% block="turn high power %pin|%output=on_off_toggle||at %power|\\%"
+    //% power.min=0 power.max=100
+    //% expandableArgumentMode="toggle"
+    //% weight=80 blockGap=8
+    export function controlHighPowerPin(pin: kitronik_smart_greenhouse.HighPowerPins, output: boolean, power: number = 100): void {
+        if (pin == 13) {
+            if (output == true) {
+                if (power != 100) {
+                    let pin13Analog = power * (1023/100)
+                    pins.analogWritePin(AnalogPin.P13, pin13Analog)
+                }
+                else {
+                    pins.digitalWritePin(DigitalPin.P13, 1)
+                }
+            }
+            else {
+                pins.digitalWritePin(DigitalPin.P13, 0)
+            }
+        }
+        else if (pin == 14) {
+            if (output == true) {
+                if (power != 100) {
+                    let pin14Analog = power * (1023/100)
+                    pins.analogWritePin(AnalogPin.P14, pin14Analog)
+                }
+                else {
+                    pins.digitalWritePin(DigitalPin.P14, 1)
+                }
+                
+            }
+            else {
+                pins.digitalWritePin(DigitalPin.P14, 0)
+            }
+        }
+    }
+
+    /**
+     * Render a boolean as an on/off toggle
+     */
+    //% blockId=on_off_toggle
+    //% block="$on"
+    //% on.shadow="toggleOnOff"
+    //% blockHidden=true
+    export function onOff(on: boolean): boolean {
+        return on;
+    }
+
+
 
     ////////////////////////////////
     //       DATA LOGGING         //
