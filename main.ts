@@ -893,11 +893,8 @@ namespace kitronik_air_quality {
             setupGasSensor()
         }
 
-        show("Setting baselines", 4, ShowAlign.Centre)
-
         kitronik_BME688.establishBaselines()    // Call function in bme688-base to read and calculate the baselines for gas resistance and ambient temperature
 
-        show("Setup Complete!", 5, ShowAlign.Centre)
         basic.pause(2000)
         clear()
     }
@@ -964,8 +961,7 @@ namespace kitronik_air_quality {
     export function readGasRes(): number {
         if (gasInit == false) {
             clear()
-            show("ERROR", 3, ShowAlign.Centre)
-            show("Gas Sensor not setup!", 5, ShowAlign.Centre)
+            //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
 
@@ -984,8 +980,7 @@ namespace kitronik_air_quality {
     export function readeCO2(): number {
         if (gasInit == false) {
             clear()
-            show("ERROR", 3, ShowAlign.Centre)
-            show("Gas Sensor not setup!", 5, ShowAlign.Centre)
+            //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
         kitronik_BME688.calcAirQuality()
@@ -1006,8 +1001,7 @@ namespace kitronik_air_quality {
     export function getAirQualityPercent(): number {
         if (gasInit == false) {
             clear()
-            show("ERROR", 3, ShowAlign.Centre)
-            show("Gas Sensor not setup!", 5, ShowAlign.Centre)
+            //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
         kitronik_BME688.calcAirQuality()
@@ -1027,8 +1021,7 @@ namespace kitronik_air_quality {
     export function getAirQualityScore(): number {
         if (gasInit == false) {
             clear()
-            show("ERROR", 3, ShowAlign.Centre)
-            show("Gas Sensor not setup!", 5, ShowAlign.Centre)
+            //NEED TO LET SOEM ONE KNOW WE HAVE AN ERROR
             return 0
         }
         kitronik_BME688.calcAirQuality()
